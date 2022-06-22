@@ -1,0 +1,120 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de cadastro de funcionários de uma empresa",
+        "contact": {
+            "email": "beatriz.teixeira@compjunior.com.br"
+        },
+        "version": "1.0.0"
+        },
+        "servers": [
+            {
+                "url": "http://localhost:3000/v1",
+                "description": "API de teste"
+            }
+        ],
+        "paths" : {
+            "/funcionario":{
+                "post": {
+                    "summary": "Cadastro de um funcionário.",
+                    "description": "A rota realizará o cadastro de um novo funcionário.",
+                    "tags": ["Funcionario"],
+                    "requestBody": {
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "$ref": "#/components/schemas/funcionario"
+                                }
+                            },
+                            "examples": {
+                                "funcionario1":{
+                                    "value": {
+                                        "nome": "Juvenal",
+                                        "cpf" : "12566595578",
+                                        "email": "juvenalrogerio@gmail.com",
+                                        "setorFuncionario": "Marketing",
+                                        "dataNasc": "2022-12-02"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "get":{
+                    "summary": "Retorna todos os funcionários cadastrados.",
+                    "description": "A rota retornará os funcionários cadastrados no banco de dados.",
+                    "tags": ["Funcionario"]
+                }
+            },
+            "/funcionario/id/{id}":{
+                "put":{
+                    "summary": "Atualiza dados de um funcionário a partir de seu ID.",
+                    "description": "A rota retornará os funcionários com dados atualizados.",
+                    "tags": ["Funcionario"],
+                    "requestBody": {
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "$ref": "#/components/schemas/funcionario"
+                                }
+                            }
+                        }
+                    }
+                },
+                "get":{
+                    "summary": "Busca por funcionário a partir de seu ID.",
+                    "description": "A rota retornará os dados do funcionário cujo ID foi incluído na URL.",
+                    "tags": ["Funcionario"]
+                }
+            },
+            "/funcionario/{id}":{
+                "delete":{
+                    "summary": "Remoção de um funcionário do banco de dados a partir de seu ID.",
+                    "description": "A rota removerá os dados do banco de dados do funcionário cujo ID está na URL.",
+                    "tags": ["Funcionario"]
+                }
+            }
+        },
+        "responses":{
+            "400":{
+                "description": "Erro ao salvar dados"
+            },
+            "200":{
+                "description": "OK",
+                "content": {
+                    "application/json": {
+                        "schema":{
+                            "$ref": "#/components/schemas/funcionario"
+                        }
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "funcionario":{
+                    "type": "object",
+                    "properties": {
+                        "nome": {
+                            "type": "string"
+                        },
+                        "cpf": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "setorFuncionario": {
+                            "type": "string"
+                        },
+                        "dataNasc": {
+                            "type": "Date"
+                        },
+                        "createdAt": {
+                            "type": "Date"
+                        }
+                    }
+                }
+            }
+        }
+}
